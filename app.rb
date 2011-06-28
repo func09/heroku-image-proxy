@@ -19,6 +19,7 @@ get '/' do
     uri = URI.parse(params[:proxy])
     path = Pathname.new uri.to_s
     open uri.to_s do |f|
+      cache_control :public, :max_age => 31557600
       content_type f.content_type
       send_file f
     end
